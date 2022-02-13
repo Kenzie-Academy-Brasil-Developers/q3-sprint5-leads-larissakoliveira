@@ -1,4 +1,4 @@
-from itsdangerous import json
+from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.session import Session
@@ -58,19 +58,50 @@ def post_lead():
 def update_lead():
     session: Session = db.session
     base_query = session.query(Lead)
-
     data = request.get_json()
 
-    lead = base_query.filter_by(email = data).first()
+    for value in data.values():
+            if type(value) != str:
+                return {"error": "values must be string!"}
 
-    return jsonify(lead)
+    try:
+        if len(data) != 1:
+            raise KeyError
 
-    # record = session.query(CallRecord).filter(CallRecord.id == call_record_id).first()
-    # record = session.query(CallRecord).get(call_record_id)
-    # record = base_query.filter_by(id=call_record_id).first()
-    # record = base_query.filter_by(source=111111113).all()
+        lead = base_query.filter_by(email = data["email"]).one()
+        setattr(lead, "visits",(lead.__dict__["visits"] + 1))
+        setattr(lead, "last_visit", datetime.now())
+        session.add(lead)
+        session.commit()
 
+        return "", HTTPStatus.NO_CONTENT
+
+    except NoResultFound:
+        return {"error":"Email not found!"}, HTTPStatus.NOT_FOUND
+
+    except KeyError:
+        return {"error": "accepts only email key!"}, HTTPStatus.BAD_REQUEST
 
 def delete_lead():
-    ...
+    session: Session = db.session
+    base_query = session.query(Lead)
+    data = request.get_json()
+    
+    for value in data.values():
+            if type(value) != str:
+                return {"error": "values must be string!"}
 
+    try:
+        if len(data) != 1:
+            raise KeyError
+
+        lead = base_query.filter_by(email = data["email"]).one()
+        session.delete(lead)
+        session.commit()
+        return "", HTTPStatus.NO_CONTENT
+
+    except NoResultFound:
+        return {"error":"Email not found!"}, HTTPStatus.NOT_FOUND
+
+    except KeyError:
+        return {"error": "accepts only email key!"}, HTTPStatus.BAD_REQUEST
