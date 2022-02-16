@@ -31,10 +31,11 @@ def post_lead():
     data = request.get_json()
     body_keys = set(data.keys())
     missing_keys = valid_keys.difference(body_keys)
+    pattern = r"^\([1-9]{2}\)[0-9]{5}-[0-9]{4}$"
 
     try:
 
-        if re.fullmatch(r"^\([1-9]{2}\)[0-9]{5}-[0-9]{4}$", data["phone"]) == None:
+        if re.fullmatch(pattern, str(data["phone"])) == None:
             return {"error": "phone number format is wrong!"}
 
         if len(data) != 3 or missing_keys:
