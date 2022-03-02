@@ -36,7 +36,7 @@ def post_lead():
     try:
 
         if re.fullmatch(pattern, str(data["phone"])) == None:
-            return {"error": "phone number format is wrong!"}
+            return {"error": "phone number format is wrong!"}, HTTPStatus.BAD_REQUEST
 
         if len(data) != 3 or missing_keys:
             raise KeyError

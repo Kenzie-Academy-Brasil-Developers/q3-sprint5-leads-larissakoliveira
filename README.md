@@ -1,18 +1,52 @@
-# Leads
+<center> <h1>Leads</h1> </center>
+
+## ENDPOINTS:
+
+><h2 style="color:green">POST <span style="color:gray">/leads</span></h2>
+ 
+### Request body
+**POST** request must have all these keys *"name", "email", "phone"*, and all the values must be *"strings"*. The phone must be in this format (xx)xxxxx-xxxx. Both, *phone* and *email* must be unique. 
+
+Following these rules, it will return status code <span style="color:green">201 - CREATED</span>
+```json 
+{ 
+    "name": "John Doe",
+    "email": "john@email.com",
+    "phone": "(41)90000-0000"
+} 
+```
+
+IF *phone* number is in the wrong format, this is the message returned:
+
+```json 
+{
+	"error": "phone number format is wrong!"
+} 
+```
+
+IF any value is not a *string*, this is the error message returned:
+
+```json 
+{
+	"error": "values must be string!"
+}
+```
+
+IF you try to create a user with the same *email* or/and same *phone* number, this is the message you will get:
+
+```json 
+{
+	"error": "email or/and phone already exists"
+}
+```
 
 
-| Critérios | Pts. |
-|---|---|
-| Utilizar **SQLAlchemy**, **Dataclass**, **Blueprint**, **Migrations** e **Padrão Flask Factory** corretamente. | 1 |
-| [GET] **/leads** - Rota funcionando e ordenada de acordo com o enunciado. | 1 |
-| [GET] **/leads** - [ERRO] Nenhum dado encontrado. | 0.5 |
-| [POST] **/leads** - Rota funcionando de acordo com o enunciado. | 1 |
-| [POST] **/leads** - [ERRO] E-mail e telefone únicos. | 0.5 |
-| [POST] **/leads** - [ERRO] Telefone obrigatoriamente no formato (xx)xxxxx-xxxx. | 0.5 |
-| [PATCH] **/leads** - Rota funcionando de acordo com o enunciado. | 2 |
-| [PATCH] **/leads** - [ERRO] - Corpo da requisição obrigatoriamente apenas com email e deve ser uma string; | 0.5 |
-| [PATCH] **/leads** - [ERRO] - Nenhum dado encontrado. | 0.5 |
-| [DELETE] **/leads** - Rota funcionando de acordo com o enunciado. | 1 |
-| [DELETE] **/leads** - [ERRO] - Corpo da requisição obrigatoriamente apenas com email e deve ser uma string; | 0.5 |
-| [DELETE] **/leads** - [ERRO] - Nenhum dado encontrado. | 0.5 |
-| Arquivos **requirements.txt**, **.env**, **.env.example** e **.gitignore** (**venv** e **.env** adicionados) | 0.5 |
+
+### Body returned
+
+><h2 style="color:blue">GET <span style="color:gray">/leads</h2>
+
+><h2 style="color:yellow">PATCH <span style="color:gray">/leads</h2>
+
+
+><h2 style="color:red">DELETE <span style="color:gray">/leads</h2>
