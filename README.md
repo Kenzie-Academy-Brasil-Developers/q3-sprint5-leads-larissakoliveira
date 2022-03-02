@@ -16,7 +16,7 @@ Following these rules, it will return status code <span style="color:green">201 
 } 
 ```
 
-IF *phone* number is in the wrong format, this is the message returned:
+IF *phone* number is in the wrong format, this is the message returned with the status code <span style="color:orange"> 400 - BADQUEST</span>:
 
 ```json 
 {

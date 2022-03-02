@@ -43,7 +43,7 @@ def post_lead():
 
         for value in data.values():
             if type(value) != str:
-                return {"error": "values must be string!"}
+                return {"error": "values must be string!"}, HTTPStatus.UNPROCESSABLE_ENTITY
 
         lead = Lead(**data)
         db.session.add(lead)
