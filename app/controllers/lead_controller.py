@@ -63,7 +63,7 @@ def update_lead():
 
     for value in data.values():
             if type(value) != str:
-                return {"error": "values must be string!"}
+                return {"error": "values must be string!"}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     try:
         if len(data) != 1:
@@ -90,7 +90,7 @@ def delete_lead():
     
     for value in data.values():
             if type(value) != str:
-                return {"error": "values must be string!"}
+                return {"error": "values must be string!"}, HTTPStatus.UNPROCESSABLE_ENTITY
 
     try:
         if len(data) != 1:
