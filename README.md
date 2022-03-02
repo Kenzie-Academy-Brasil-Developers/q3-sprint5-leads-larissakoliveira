@@ -1,7 +1,9 @@
 <center> <h1>Leads</h1> </center>
 
 ## ENDPOINTS:
+<br>
 
+---
 ><h2 style="color:green">POST <span style="color:gray">/leads</span></h2>
  
 **POST** request MUST have ALL these keys and ONLY *"name", "email", "phone"*, and all the values must be *"strings"*. The phone must be in this format (xx)xxxxx-xxxx. Both, *phone* and *email* must be unique. 
@@ -59,8 +61,13 @@ IF any required key (*email, phone, name*) is missing or any other is added to t
 }
 ```
 
-################################################################
+<br>
+<br>
+<br>
+
+---
 ><h2 style="color:blue">GET <span style="color:gray">/leads</h2>
+<br>
 
 **GET** will return all users with the status code <span style="color:green"> 200 - OK</span>. 
 
@@ -96,6 +103,9 @@ IF no users were found, this will be returned with the status code <span style="
 }
 ```
 
+<br>
+<br>
+<br>
 
 ---
 ><h2 style="color:yellow">PATCH <span style="color:gray">/leads</h2>
@@ -138,6 +148,9 @@ IF any other key different than *email* is used, this is the eror message that w
 }
 ```
 
+<br>
+<br>
+<br>
 
 ---
 ><h2 style="color:red">DELETE <span style="color:gray">/leads</h2>
